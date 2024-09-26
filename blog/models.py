@@ -2,7 +2,6 @@
 
 from django.db import models
 from django.conf import settings
-
 from django.utils import timezone
 
 class PostQuerySet(models.QuerySet):
@@ -134,6 +133,8 @@ class Comment(models.Model):
     updated = models.DateTimeField(
         auto_now=True
     )
+
+    objects = models.Manager()
 
     class Meta:
         ordering = ['-created']
