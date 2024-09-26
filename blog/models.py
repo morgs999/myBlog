@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.conf import settings
+
 from django.utils import timezone
 
 class PostQuerySet(models.QuerySet):
@@ -9,6 +10,7 @@ class PostQuerySet(models.QuerySet):
         return self.filter(status=self.model.PUBLISHED)
     def draft(self):
         return self.filter(status=self.model.DRAFT)
+
 
 class Topic(models.Model):
     """blog post topic"""
@@ -24,6 +26,7 @@ class Topic(models.Model):
 
     def __str__(self):
         return str(self.name)
+
     class Meta:
         ordering = ['name']
 
@@ -137,4 +140,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.text)[:50]
-    
