@@ -1,14 +1,23 @@
 # blog/models.py
+"""blog models"""
 
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 class PostQuerySet(models.QuerySet):
+    """custom queryset for Post model"""
     def published(self):
+        """return only published posts"""
         return self.filter(status=self.model.PUBLISHED)
     def draft(self):
+        """return only draft posts"""
         return self.filter(status=self.model.DRAFT)
+    def get_authors(self):
+        """return all authors who have authored a post"""
+        user = get_user_model()
+        return user.objects.filter(blog_posts__in=self).distinct()
 
 
 class Topic(models.Model):
@@ -27,6 +36,7 @@ class Topic(models.Model):
         return str(self.name)
 
     class Meta:
+        """meta information for Topic model"""
         ordering = ['name']
 
 
@@ -87,11 +97,13 @@ class Post(models.Model):
     objects = PostQuerySet.as_manager()
 
     def publish(self):
+        """publish this post"""
         self.status = self.PUBLISHED
         self.published = timezone.now()
 
     # meta
     class Meta:
+        """meta information for Post model"""
         ordering = ['created',]
 
     def __str__(self):
@@ -137,6 +149,7 @@ class Comment(models.Model):
     objects = models.Manager()
 
     class Meta:
+        """meta information for Comment model"""
         ordering = ['-created']
 
     def __str__(self):
