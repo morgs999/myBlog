@@ -5,7 +5,7 @@ import datetime as dt
 from model_bakery import baker
 import pytest
 from freezegun import freeze_time
-from blog.models import Post
+from blog.models import Post, Topic
 
 pytestmark = pytest.mark.django_db
 
@@ -60,3 +60,16 @@ def test_get_authors_returns_users_who_have_authored_a_post(django_user_model):
     baker.make('blog.Post', author=author, _quantity=3)
 
     assert list(Post.objects.get_authors()) == [author]
+
+def test_get_topics_returns_topics_of_all_posts():
+    """test of get topics"""
+    # Create a topic
+    topic = baker.make('blog.Topic')
+    # Create a post that has the topic
+    assert list(Topic.objects.get_topics()) == [topic]
+
+def test_get_number_of_posts_per_topic():
+    """test to get number of posts per topic"""
+    topic = baker.make('blog.Topic')
+    baker.make('blog.Post', topics=topic, quantity=3)
+    assert Topic.objects.get_topics_number() == 3
