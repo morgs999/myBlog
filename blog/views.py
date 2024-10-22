@@ -2,33 +2,31 @@
 """views for blog app"""
 
 from django.shortcuts import render
-from django.db.models import Count
-from django.views import View
+# from django.db.models import Count
+from django.views.generic.base import TemplateView
 from . import models
 
-def home(request):
+class HomeView(TemplateView):
     """
     The Blog homepage
     """
 
-    latest_posts = models.Post.objects.filter(status='published').order_by('-created')
+    template_name = 'blog/home.html'
 
-    authors = models.Post.objects.published().get_authors().order_by('first_name')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        latest_posts = models.Post.objects.filter(status='published').order_by('-created')
 
-    topics = models.Topic.objects.annotate(post_count=Count('blog_posts')).order_by('-post_count')
+        context.update({'latest_posts':latest_posts})
 
-    context = {
-        'authors': authors,
-        'latest_posts': latest_posts,
-        'topics': topics,
-    }
+        return context
 
-    return render(request, 'blog/home.html', context)
-
-class AboutView(View):
+class AboutView(TemplateView):
     """
     About Page
     """
-    def get(self, request):
-        """Get Request"""
-        return render(request, 'blog/about.html')
+    template_name = 'blog/about.html'
+
+def terms_and_conditions(request):
+    """termsandconditions"""
+    return render(request, 'blog/terms_and_conditions.html')
