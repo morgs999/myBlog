@@ -3,6 +3,7 @@
 
 from django.shortcuts import render
 from django.db.models import Count
+from django.views import View
 from . import models
 
 def home(request):
@@ -23,3 +24,11 @@ def home(request):
     }
 
     return render(request, 'blog/home.html', context)
+
+class AboutView(View):
+    """
+    About Page
+    """
+    def get(self, request):
+        """Get Request"""
+        return render(request, 'blog/about.html')
