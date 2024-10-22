@@ -4,6 +4,35 @@
     --gradient: linear-gradient(to right, #F61C1C, #FF679C);
 }
 
+* {
+    font-family: 'Rakkas', 'Robot', serif;
+}
+
+h1,
+h2 {
+    font-family: 'Rakkas', serif;
+}
+
+h3 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    font-style: oblique;
+    line-height: 60%;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
 html {
     height: 100%;
     /* Use whole height of browser */
@@ -13,7 +42,7 @@ body {
     background-color: papayawhip;
     display: grid;
     /* Use CSS grid */
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    /* font-family: 'Roboto', Arial, Helvetica, sans-serif; */
     grid-template-rows: auto auto 1fr auto;
     /* Sticky footer */
     margin: 0 auto;
@@ -108,6 +137,7 @@ img {
 }
 
 .post {
+    font-family: 'Roboto';
     margin: 2rem;
     padding: 1rem;
     border: 1px solid #ddd;
@@ -117,6 +147,7 @@ img {
 
 /* Style the footer */
 #site-footer {
+    font-family: 'Roboto';
     font-size: 0.9rem;
     text-align: center;
     padding: 2em;

@@ -4,6 +4,7 @@
 from django.shortcuts import render
 # from django.db.models import Count
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 from . import models
 
 class HomeView(TemplateView):
@@ -26,6 +27,12 @@ class AboutView(TemplateView):
     About Page
     """
     template_name = 'blog/about.html'
+
+class PostListView(ListView):
+    """
+    Posts page
+    """
+    model = models.Post
 
 def terms_and_conditions(request):
     """termsandconditions"""
