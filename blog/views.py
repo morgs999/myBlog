@@ -4,7 +4,7 @@
 from django.shortcuts import render
 # from django.db.models import Count
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from . import models
 
 class HomeView(TemplateView):
@@ -30,9 +30,35 @@ class AboutView(TemplateView):
 
 class PostListView(ListView):
     """
-    Posts page
+    All the (published) Posts page
     """
     model = models.Post
+    context_object_name = 'posts'
+    queryset = models.Post.objects \
+        .published() \
+        .order_by('-published')
+    
+class PostDetailView(DetailView):
+    """
+    Single Post Page
+    """
+    model = models.Post
+
+    def get_queryset(self):
+        # Get the base queryset
+        queryset = super().get_queryset().published()
+
+        # If a PK lookup, use default queryset
+        if 'pk' in self.kwargs:
+            return queryset
+        
+        # else filter on published date
+        return queryset.filter(
+            published__year=self.kwargs['year'],
+            published__month=self.kwargs['month'],
+            published__day=self.kwargs['day'],
+        )
+
 
 def terms_and_conditions(request):
     """termsandconditions"""
