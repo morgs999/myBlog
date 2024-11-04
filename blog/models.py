@@ -36,6 +36,11 @@ class Topic(models.Model):
 
     objects = models.Manager()
 
+    def get_absolute_url(self):
+        """provide url"""
+        kwargs={'slug':self.slug}
+        return reverse('topic-detail', kwargs=kwargs)
+
     def __str__(self):
         return str(self.name)
 

@@ -30,6 +30,7 @@
             <li><a href='{% url "home" %}'>Home</a></li>
             <li><a href='{% url "about" %}'>About</a></li>
             <li><a href='{% url "post-list" %}'>Posts</a></li>
+            <li><a href='{% url "topic-list" %}'>Topics</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
@@ -45,7 +46,7 @@
             <section id="topics-list">
                 <h3>Topics</h3>
                 <ul>
-                    {% for topic in topics %}
+                    {% for topic in topics_sidebar %}
                     <li>
                         {{ topic.name }} ({{ topic.post_count }})
                     </li>

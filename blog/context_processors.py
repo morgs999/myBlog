@@ -9,8 +9,8 @@ def base_context(request):
             .get_authors() \
             .order_by('first_name')
 
-    topics = models.Topic.objects.annotate(
+    topics_sidebar = models.Topic.objects.annotate(
             post_count=Count('blog_posts')) \
             .order_by('-post_count')
 
-    return {'authors':authors,'topics':topics}
+    return {'authors':authors,'topics_sidebar':topics_sidebar}

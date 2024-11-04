@@ -28,6 +28,23 @@ class AboutView(TemplateView):
     """
     template_name = 'blog/about.html'
 
+class TopicListView(ListView):
+    """
+    All the Topics page
+    """
+    model = models.Topic
+    context_object_name = 'topics'
+    queryset = models.Topic.objects.order_by('name')
+
+class TopicDetailView(DetailView):
+    """
+    Single Topic Page
+    """
+    model = models.Topic
+
+    def get_queryset(self):
+        pass
+
 class PostListView(ListView):
     """
     All the (published) Posts page
@@ -37,7 +54,7 @@ class PostListView(ListView):
     queryset = models.Post.objects \
         .published() \
         .order_by('-published')
-    
+
 class PostDetailView(DetailView):
     """
     Single Post Page
@@ -51,7 +68,7 @@ class PostDetailView(DetailView):
         # If a PK lookup, use default queryset
         if 'pk' in self.kwargs:
             return queryset
-        
+
         # else filter on published date
         return queryset.filter(
             published__year=self.kwargs['year'],
