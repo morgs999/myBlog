@@ -185,6 +185,15 @@ a:hover {
     margin: 2rem 0;
 }
 
+.post-topic-link {
+    font-family: 'Roboto';
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    line-height: 2em;
+    text-transform: uppercase;
+    color: darkblue;
+}
+
 .comment {
     font-style: italic;
     color: darkblue;

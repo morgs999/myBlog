@@ -13,6 +13,8 @@ urlpatterns = [
 
     path('about/', views.AboutView.as_view(), name='about'),
 
+    path('contact/', views.ContactView.as_view(), name='contact'),
+
     path('/terms', views.terms_and_conditions, name='terms-and-conditions'),
 
     path('posts/', views.PostListView.as_view(), name='post-list'),

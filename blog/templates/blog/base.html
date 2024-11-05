@@ -31,7 +31,7 @@
             <li><a href='{% url "about" %}'>About</a></li>
             <li><a href='{% url "post-list" %}'>Posts</a></li>
             <li><a href='{% url "topic-list" %}'>Topics</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href='{% url "contact" %}'>Contact</a></li>
         </ul>
     </nav>
 
@@ -51,6 +51,7 @@
                         <a href='{{ topic.get_absolute_url }}'>{{ topic.name }} ({{ topic.post_count }})</a>
                     </li>
                     {% endfor %}
+                    <li><a href="{% url 'topic-list' %}">view all topics</a></li>
                 </ul>
             </section>
             <section id="author-list">

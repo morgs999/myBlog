@@ -16,7 +16,7 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        latest_posts = models.Post.objects.filter(status='published').order_by('-created')
+        latest_posts = models.Post.objects.filter(status='published').order_by('-published')
 
         context.update({'latest_posts':latest_posts})
 
@@ -27,6 +27,12 @@ class AboutView(TemplateView):
     About Page
     """
     template_name = 'blog/about.html'
+
+class ContactView(TemplateView):
+    """
+    Contact Page
+    """
+    template_name = 'blog/contact.html'
 
 class TopicListView(ListView):
     """
@@ -87,7 +93,8 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.all()
+        context['topics'] = self.object.topics.all
+        context['comments'] = self.object.comments.all().order_by('created')
         return context
 
 def terms_and_conditions(request):
