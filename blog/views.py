@@ -34,16 +34,24 @@ class TopicListView(ListView):
     """
     model = models.Topic
     context_object_name = 'topics'
-    queryset = models.Topic.objects.order_by('name')
 
 class TopicDetailView(DetailView):
     """
     Single Topic Page
     """
     model = models.Topic
+    context_object_name = 'topic'
 
-    def get_queryset(self):
-        pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = models.Post.objects \
+            .published() \
+            .filter(topics=self.object) \
+            .order_by('-published')
+        return context
+
+    def get_object(self, queryset=None):
+        return models.Topic.objects.get(slug=self.kwargs['slug'])
 
 class PostListView(ListView):
     """
