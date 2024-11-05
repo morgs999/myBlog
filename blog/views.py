@@ -44,6 +44,7 @@ class TopicDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['postsCount'] = self.object.blog_posts.published().count()
         context['posts'] = models.Post.objects \
             .published() \
             .filter(topics=self.object) \
@@ -84,6 +85,10 @@ class PostDetailView(DetailView):
             published__day=self.kwargs['day'],
         )
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.all()
+        return context
 
 def terms_and_conditions(request):
     """termsandconditions"""

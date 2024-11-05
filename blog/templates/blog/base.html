@@ -48,7 +48,7 @@
                 <ul>
                     {% for topic in topics_sidebar %}
                     <li>
-                        {{ topic.name }} ({{ topic.post_count }})
+                        <a href='{{ topic.get_absolute_url }}'>{{ topic.name }} ({{ topic.post_count }})</a>
                     </li>
                     {% endfor %}
                 </ul>
