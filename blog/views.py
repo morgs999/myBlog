@@ -116,6 +116,7 @@ class FormViewExample(FormView):
         return super().form_valid(form)
 
 class ContactFormView(CreateView):
+    """contact form"""
     model = models.Contact
     success_url = reverse_lazy('home')
     fields = [
@@ -133,6 +134,26 @@ class ContactFormView(CreateView):
         )
 
         return super().form_valid(form)
+
+class PhotoContestView(CreateView):
+    """photo contest form"""
+    model = models.PhotoContest
+    success_url = reverse_lazy('photo-contest')
+    fields = [
+        'name',
+        'email',
+        'photo',
+    ]
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thanks for entering the photo cOnTeSt!'
+        )
+
+        return super().form_valid(form)
+
 
 def terms_and_conditions(request):
     """termsandconditions"""

@@ -21,3 +21,9 @@ class ExampleSignupForm(forms.Form):
         required=False,
         label='Do you wish to receive our newsletter?'
     )
+
+class PhotoContestForm(forms.Form):
+    """photo contest form"""
+    name = forms.CharField(label='Name', max_length=100, required=True)
+    email = forms.EmailField(required=True)
+    photo = forms.ImageField(required=True)

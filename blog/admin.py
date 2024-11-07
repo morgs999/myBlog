@@ -42,3 +42,10 @@ class ContactAdmin(admin.ModelAdmin):
         'message',
         'submitted'
     )
+
+@admin.register(models.PhotoContest)
+class PhotoContestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'photo', 'submitted')
+    readonly_fields = ('name', 'email', 'photo', 'submitted')
+    search_fields = ('name', 'email')
+    list_filter = ('submitted', 'name', 'email')

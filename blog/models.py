@@ -196,8 +196,21 @@ class Contact(models.Model):
     submitted = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        """meta"""
         ordering = ['-submitted']
 
     def __str__(self):
         return f'{self.submitted}: {self.email}'
+
+class PhotoContest(models.Model):
+    """photo contest"""
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    photo = models.ImageField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted']
+
+    def __str__(self):
+        return f"{self.name}'s Photo Submission"
