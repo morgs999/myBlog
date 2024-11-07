@@ -16,30 +16,18 @@ body {
     background-color: papayawhip;
     display: grid;
     /* font-family: 'Roboto', Arial, Helvetica, sans-serif; */
-    /* Use CSS grid */
     grid-template-rows: auto auto 1fr auto;
-    /* Sticky footer */
     margin: 0 auto;
-    /* Centers the page */
     max-width: 1000px;
-    /* Set max width */
     min-height: 100%;
-    /* Full height */
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 body .wrapper {
     display: grid;
-    /* Use CSS grid */
     grid-template-rows: auto auto 1fr auto;
-    /* Sticky footer */
-    margin: 0 auto;
-    /* Centers the page */
     min-height: 100%;
-    /* Full height */
     max-width: 1000px;
-    /* Set max width */
-    padding: 1rem;
 }
 
 .django-messages {
