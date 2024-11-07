@@ -13,7 +13,8 @@ urlpatterns = [
 
     path('about/', views.AboutView.as_view(), name='about'),
 
-    path('contact/', views.ContactView.as_view(), name='contact'),
+    # path('contact/', views.ContactView.as_view(), name='contact'),
+    path('contact', views.ContactFormView.as_view(), name='contact'),
 
     path('/terms', views.terms_and_conditions, name='terms-and-conditions'),
 
@@ -25,5 +26,7 @@ urlpatterns = [
 
     path('topics/', views.TopicListView.as_view(), name='topic-list'),
 
-    path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic-detail')
+    path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic-detail'),
+
+    path('formview-example/', views.FormViewExample.as_view(), name='formview-example'),
 ]

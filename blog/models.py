@@ -19,7 +19,7 @@ class PostQuerySet(models.QuerySet):
     def get_authors(self):
         """return all authors who have authored a post"""
         user = get_user_model()
-        return user.objects.filter(blog_posts__in=self).distinct()    
+        return user.objects.filter(blog_posts__in=self).distinct()
 
 
 class Topic(models.Model):
@@ -177,3 +177,20 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.text)[:50]
+
+
+class Contact(models.Model):
+    """contact form"""
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    message = models.TextField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        """meta"""
+        ordering = ['-submitted']
+
+    def __str__(self):
+        return f'{self.submitted}: {self.email}'
