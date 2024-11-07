@@ -3,7 +3,7 @@ URL configuration for myBlog project.
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from blog import views
@@ -31,4 +31,7 @@ urlpatterns = [
     path('topics/<slug:slug>/', views.TopicDetailView.as_view(), name='topic-detail'),
 
     path('formview-example/', views.FormViewExample.as_view(), name='formview-example'),
+
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

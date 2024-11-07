@@ -35,6 +35,8 @@ INSTALLED_APPS = [
 
     # my apps
     'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myBlog.urls'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 TEMPLATES = [
     {

@@ -19,7 +19,7 @@
     <img src="{{ post.cover.url }}" alt="{{ post.title }}" style="max-height: 200px;">
     {% endif %}
 
-    <section class="content">{{ post.content|linebreaks }}</section>
+    <section class="content">{{ post.content|safe|linebreaks }}</section>
     <hr>
     <section class="comments">
         <h2>Comments</h2>

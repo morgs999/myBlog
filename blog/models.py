@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class PostQuerySet(models.QuerySet):
@@ -85,7 +86,7 @@ class Post(models.Model):
         help_text='Set to "published" to make this post publicly visible',
     )
 
-    content = models.TextField()
+    content = RichTextUploadingField()
 
     cover = models.ImageField(
         blank=True,
