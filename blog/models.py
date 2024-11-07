@@ -87,6 +87,12 @@ class Post(models.Model):
 
     content = models.TextField()
 
+    cover = models.ImageField(
+        blank=True,
+        null=True,
+        help_text='A book cover per post',
+    )
+
     published = models.DateTimeField(
         null=True,
         blank=True,
