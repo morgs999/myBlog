@@ -1,0 +1,10 @@
+<article class="post">
+    <h3>{{ post.title }}</h3>
+    <h4>{{ post.published|timesince }} ago</h4>
+    <br>
+    <time>{{ post.published }}</time>
+    <section class="teaser">
+        <p>{{ post.content|truncatewords:20 }}</p>
+    </section>
+    <p><a href="{{ post.get_absolute_url }}">Read more &rarr; </a></p>
+</article>

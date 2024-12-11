@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block page_title %}{{ post.title }}{% endblock %}
+
+{% block main %}
+<article id="post-detail-article">
+    <h1>{{ post.title }}</h1>
+
+    <p class="post-topic-link">Found in:
+        {% for topic in topics %}
+        <a class="post-topic-link" href='{{ topic.get_absolute_url }}'>{{ topic }}, </a>
+        {% endfor %}
+    </p>
+
+    <span class="published">Published <time>{{ post.published }}</time></span><br>
+    <span class="author">{{ post.author.get_full_name }}</span>
+
+    <section class="content">{{ post.content|linebreaks }}</section>
+    <hr>
+    <section class="comments">
+        <h2>Comments</h2>
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="comment">
+            <p style="text-align: end;">{{ comment.name }}</p>
+            <p style="text-align: end;">{{ comment.email }}</p>
+            <p style="font-size: 1.33em;">{{ comment.text }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No comments yet.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}

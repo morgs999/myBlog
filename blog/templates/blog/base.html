@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rakkas&display=swap"
         rel="stylesheet">
     <title>My Blog – {% block page_title %}A Python Blog{% endblock %}</title>
 </head>
@@ -19,19 +19,19 @@
 <body>
     <!-- The header -->
     <header id="site-header">
+        <div class="parallax"></div>
         <h1>My Blog</h1>
         <h5>A blog about literature.</h5>
     </header>
 
-    <img src="{% static 'blog/logo.png' %}" alt="Logo">
-
     <!-- Top navigation -->
     <nav id="top-nav">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Posts</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href='{% url "home" %}'>Home</a></li>
+            <li><a href='{% url "about" %}'>About</a></li>
+            <li><a href='{% url "post-list" %}'>Posts</a></li>
+            <li><a href='{% url "topic-list" %}'>Topics</a></li>
+            <li><a href='{% url "contact" %}'>Contact</a></li>
         </ul>
     </nav>
 
@@ -46,11 +46,12 @@
             <section id="topics-list">
                 <h3>Topics</h3>
                 <ul>
-                    {% for topic in topics %}
+                    {% for topic in topics_sidebar %}
                     <li>
-                        {{ topic.name }} ({{ topic.post_count }})
+                        <a href='{{ topic.get_absolute_url }}'>{{ topic.name }} ({{ topic.post_count }})</a>
                     </li>
                     {% endfor %}
+                    <li><a href="{% url 'topic-list' %}">view all topics</a></li>
                 </ul>
             </section>
             <section id="author-list">
@@ -66,6 +67,8 @@
 
     <!-- The footer -->
     <footer id="site-footer">
+        <a href="{% url 'terms-and-conditions'%}">Terms&Conditions</a>
+        <br>
         <!-- Print copyright with the current year -->
         Copyright &copy;{% now ' Y / M ' %}
     </footer>

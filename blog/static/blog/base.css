@@ -4,6 +4,10 @@
     --gradient: linear-gradient(to right, #F61C1C, #FF679C);
 }
 
+* {
+    font-family: 'Rakkas', 'Robot', serif;
+}
+
 html {
     height: 100%;
     /* Use whole height of browser */
@@ -13,7 +17,7 @@ body {
     background-color: papayawhip;
     display: grid;
     /* Use CSS grid */
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    /* font-family: 'Roboto', Arial, Helvetica, sans-serif; */
     grid-template-rows: auto auto 1fr auto;
     /* Sticky footer */
     margin: 0 auto;
@@ -25,6 +29,39 @@ body {
     padding: 1rem;
 }
 
+h1,
+h2 {
+    font-family: 'Rakkas', serif;
+}
+
+h3 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+h4,
+h5,
+h6 {
+    font-family: 'Roboto', sans-serif;
+    font-style: oblique;
+    line-height: 60%;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+.parallax {
+    background-image: url('/static/blog/books.jpg');
+    height: 200px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 
 /*
@@ -64,13 +101,6 @@ a:hover {
     margin: 0;
 }
 
-img {
-    max-width: 50%;
-    height: auto;
-    margin: auto;
-    padding: auto;
-}
-
 /* Style the top nav */
 #top-nav {
     padding: 0.5rem 0;
@@ -108,6 +138,7 @@ img {
 }
 
 .post {
+    font-family: 'Roboto';
     margin: 2rem;
     padding: 1rem;
     border: 1px solid #ddd;
@@ -115,8 +146,67 @@ img {
     box-shadow: 5px 5px 5px lightslategray;
 }
 
+/* Post preview */
+.post-preview {
+    border-bottom: 1px dotted darkblue;
+}
+
+.post-preview h2 {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.post-preview time {
+    color: #999;
+}
+
+.post-preview section {
+    margin: 1rem 0;
+}
+
+/* Post detail article */
+#post-detail-article h1 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#post-detail-article .author {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+}
+
+#post-detail-article .published {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+#post-detail-article .content {
+    margin: 2rem 0;
+}
+
+.post-topic-link {
+    font-family: 'Roboto';
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    line-height: 2em;
+    text-transform: uppercase;
+    color: darkblue;
+}
+
+.comment {
+    font-style: italic;
+    color: darkblue;
+    margin: 1em;
+    padding: 0.5em;
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888888;
+}
+
 /* Style the footer */
 #site-footer {
+    font-family: 'Roboto';
     font-size: 0.9rem;
     text-align: center;
     padding: 2em;

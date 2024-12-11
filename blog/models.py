@@ -4,6 +4,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.urls import reverse
 from django.contrib.auth import get_user_model
 
 
@@ -34,6 +35,11 @@ class Topic(models.Model):
     )
 
     objects = models.Manager()
+
+    def get_absolute_url(self):
+        """provide url"""
+        kwargs={'slug':self.slug}
+        return reverse('topic-detail', kwargs=kwargs)
 
     def __str__(self):
         return str(self.name)
@@ -103,6 +109,20 @@ class Post(models.Model):
         """publish this post"""
         self.status = self.PUBLISHED
         self.published = timezone.now()
+
+    def get_absolute_url(self):
+        """provide url"""
+        if self.published:
+            kwargs={
+                'year':self.published.year,
+                'month':self.published.month,
+                'day':self.published.day,
+                'slug':self.slug
+            }
+        else:
+            kwargs = {'pk':self.pk}
+
+        return reverse('post-detail', kwargs=kwargs)
 
     # meta
     class Meta:

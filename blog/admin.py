@@ -10,9 +10,9 @@ class CommentInline(admin.TabularInline):
 
 @admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created', 'updated',)
+    list_display = ('title', 'published', 'updated',)
     search_fields = ('title', 'author__username','author__first_name', 'author__last_name')
-    list_filter = ('status', 'topics',)
+    list_filter = ('author', 'status', 'topics',)
     prepopulated_fields = {'slug': ('title',)}
     inlines = [CommentInline]
 
