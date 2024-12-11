@@ -26,3 +26,26 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ('post', 'name', 'created', 'updated', 'approved')
     search_fields = ('post__title', 'name')
     list_filter = ('approved',)
+
+@admin.register(models.Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+    readonly_fields = (
+        'email',
+        'last_name',
+        'first_name',
+        'message',
+        'submitted'
+    )
+
+@admin.register(models.PhotoContest)
+class PhotoContestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'photo', 'submitted')
+    readonly_fields = ('name', 'email', 'photo', 'submitted')
+    search_fields = ('name', 'email')
+    list_filter = ('submitted', 'name', 'email')

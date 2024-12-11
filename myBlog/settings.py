@@ -2,7 +2,7 @@
 Django settings for myBlog project.
 """
 
-# import os
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -16,7 +16,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^vqsli-!_91=mmb!!yy2+v0r@pt9)tcv5&w7oy+=47i-@nc+qs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', '1'))
+# DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = [".azurewebsites.net", "127.0.0.1"]
 
@@ -33,6 +35,8 @@ INSTALLED_APPS = [
 
     # my apps
     'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -46,6 +50,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myBlog.urls'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 TEMPLATES = [
     {
@@ -117,6 +123,10 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static')
 ]
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

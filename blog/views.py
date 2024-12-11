@@ -4,8 +4,10 @@
 from django.shortcuts import render
 # from django.db.models import Count
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView, DetailView
-from . import models
+from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.urls import reverse_lazy
+from django.contrib import messages
+from . import models, forms
 
 class HomeView(TemplateView):
     """
@@ -96,6 +98,62 @@ class PostDetailView(DetailView):
         context['topics'] = self.object.topics.all
         context['comments'] = self.object.comments.all().order_by('created')
         return context
+
+class FormViewExample(FormView):
+    """example form """
+    template_name = 'blog/form_example.html'
+    form_class = forms.ExampleSignupForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        # Create a "success" message
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you for signing up!'
+        )
+        # Continue with default behaviour
+        return super().form_valid(form)
+
+class ContactFormView(CreateView):
+    """contact form"""
+    model = models.Contact
+    success_url = reverse_lazy('home')
+    fields = [
+        'first_name',
+        'last_name',
+        'email',
+        'message',
+    ]
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thanks! Your message has been sEnT...'
+        )
+
+        return super().form_valid(form)
+
+class PhotoContestView(CreateView):
+    """photo contest form"""
+    model = models.PhotoContest
+    success_url = reverse_lazy('photo-contest')
+    fields = [
+        'name',
+        'email',
+        'photo',
+    ]
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thanks for entering the photo cOnTeSt!'
+        )
+
+        return super().form_valid(form)
+
 
 def terms_and_conditions(request):
     """termsandconditions"""

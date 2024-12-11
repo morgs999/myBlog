@@ -14,8 +14,12 @@
 
     <span class="published">Published <time>{{ post.published }}</time></span><br>
     <span class="author">{{ post.author.get_full_name }}</span>
+    <br>
+    {% if post.cover %}
+    <img src="{{ post.cover.url }}" alt="{{ post.title }}" style="max-height: 200px;">
+    {% endif %}
 
-    <section class="content">{{ post.content|linebreaks }}</section>
+    <section class="content">{{ post.content|safe|linebreaks }}</section>
     <hr>
     <section class="comments">
         <h2>Comments</h2>

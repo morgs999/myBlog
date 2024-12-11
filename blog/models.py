@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class PostQuerySet(models.QuerySet):
@@ -19,7 +20,7 @@ class PostQuerySet(models.QuerySet):
     def get_authors(self):
         """return all authors who have authored a post"""
         user = get_user_model()
-        return user.objects.filter(blog_posts__in=self).distinct()    
+        return user.objects.filter(blog_posts__in=self).distinct()
 
 
 class Topic(models.Model):
@@ -85,7 +86,13 @@ class Post(models.Model):
         help_text='Set to "published" to make this post publicly visible',
     )
 
-    content = models.TextField()
+    content = RichTextUploadingField()
+
+    cover = models.ImageField(
+        blank=True,
+        null=True,
+        help_text='A book cover per post',
+    )
 
     published = models.DateTimeField(
         null=True,
@@ -177,3 +184,33 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.text)[:50]
+
+
+class Contact(models.Model):
+    """contact form"""
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    message = models.TextField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted']
+
+    def __str__(self):
+        return f'{self.submitted}: {self.email}'
+
+class PhotoContest(models.Model):
+    """photo contest"""
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    photo = models.ImageField()
+    submitted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-submitted']
+
+    def __str__(self):
+        return f"{self.name}'s Photo Submission"

@@ -1,0 +1,26 @@
+{# blog/templates/blog/photo_contest.html #}
+
+{% extends "blog/base.html" %}
+
+{% block page_title %}
+Photo Contest
+{% endblock %}
+
+{% block main %}
+<h1>Form example</h1>
+<p>You can upload a photo here which we will dump into cloud storage and never go back to. Just adding more data to the
+    unwieldy behemoth that is the "Internet".</p><br>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td colspan=2>
+                <button type="submit">Submit your photo!</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
