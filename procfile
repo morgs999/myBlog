@@ -1,1 +1,1 @@
-web: gunicorn morgan-clarke-blog.wsgi
+web: gunicorn myBlog.wsgi
