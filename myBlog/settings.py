@@ -4,6 +4,7 @@ Django settings for myBlog project.
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,11 @@ DEBUG = int(os.environ.get('DEBUG', '1'))
 # DEBUG = True
 # DEBUG = False
 
-ALLOWED_HOSTS = [".azurewebsites.net", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    'morgan-clarke-blog-9b6bfcffe1b8.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 # CSRF_TRUSTED_ORIGINS = ["https://*.azurewebsites.net"]
 
@@ -81,17 +86,29 @@ WSGI_APPLICATION = 'myBlog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'clarkmor',
+#         'PASSWORD': 'sheridan@db99',
+#         'HOST': 'morganliteratureblog.postgres.database.azure.com',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'clarkmor',
-        'PASSWORD': 'sheridan@db99',
-        'HOST': 'morganliteratureblog.postgres.database.azure.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+# Configure PostgreSQL for production
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=True
+    )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
