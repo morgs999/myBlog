@@ -29,6 +29,9 @@ jobs:
     needs: build
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Install Heroku CLI
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
