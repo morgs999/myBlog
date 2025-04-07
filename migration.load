@@ -1,0 +1,7 @@
+LOAD DATABASE
+    FROM sqlite:///Users/morgan/Documents/VSCode/python-ontariolearn/projects/myBlog/db.sqlite3
+    INTO postgresql://u2l9vedv29k23r:p743d63710663a9ed981e31ed05abd9ce6907cf3c887febed68696a91ca7e9fe5@cfls9h51f4i86c.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d7ap3lpjl7iel5
+    
+    WITH --no-ssl-cert-verification
+    
+    BEFORE LOAD DO $$ ALTER SCHEMA public OWNER TO u2l9vedv29k23r $$;
