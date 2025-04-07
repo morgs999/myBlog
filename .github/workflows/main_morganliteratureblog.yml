@@ -42,3 +42,9 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "morgan-clarke-blog"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
+
+      - name: Run migrations on Heroku
+        env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          heroku run python manage.py migrate --app morgan-clarke-blog
