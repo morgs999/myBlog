@@ -3,5 +3,4 @@
 
  ### For my Python Web Development at Sheridan College class I will be creating a blog with Python and the Django framework; as the class proceeds I will be adding features and styling.
 
-
- #### Morgan Clarke
+ ![my_blog_in_action](/my_blog_in_action.gif)
